@@ -1,11 +1,6 @@
 package httpapi
 
-import (
-	"sync"
-
-	"github.com/AaronZheng815/pvcodec/internal/capture"
-	"github.com/AaronZheng815/pvcodec/internal/model"
-)
+import "sync"
 
 type captureStore struct {
 	mu       sync.RWMutex
@@ -15,13 +10,6 @@ type captureStore struct {
 type captureSession struct {
 	ID       string
 	FilePath string
-	Packets  []packetRecord
-}
-
-type packetRecord struct {
-	Raw     capture.RawPacket
-	Summary model.PacketSummary
-	Payload []byte
 }
 
 func newCaptureStore() *captureStore {

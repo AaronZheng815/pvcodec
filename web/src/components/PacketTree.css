@@ -16,6 +16,11 @@
   color: var(--text-secondary);
 }
 
+.packet-meta-hint {
+  margin-left: auto;
+  font-size: 11px;
+}
+
 .packet-tree.empty {
   display: flex;
   align-items: center;
@@ -39,6 +44,7 @@
   line-height: 1.5;
   cursor: default;
   border-radius: 2px;
+  user-select: none;
 }
 
 .tree-row.expandable {

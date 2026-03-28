@@ -4,8 +4,10 @@ import "./PacketList.css";
 const PROTOCOL_COLORS: Record<string, string> = {
   NGAP: "var(--protocol-ngap)",
   NAS: "var(--protocol-nas)",
+  "NAS-5GS": "var(--protocol-nas)",
   Diameter: "var(--protocol-diameter)",
   GTP: "var(--protocol-gtp)",
+  GTPv2: "var(--protocol-gtp)",
   SCTP: "var(--protocol-sctp)",
   TCP: "var(--protocol-tcp)",
   UDP: "var(--protocol-udp)",
@@ -15,13 +17,32 @@ interface Props {
   packets: PacketSummary[];
   selectedIndex: number;
   onSelect: (index: number) => void;
+  emptyTitle?: string;
+  emptyHint?: string;
 }
 
-export function PacketList({ packets, selectedIndex, onSelect }: Props) {
+function protocolColor(protocol: string): string {
+  if (protocol.includes("NGAP")) return "var(--protocol-ngap)";
+  if (protocol.includes("NAS")) return "var(--protocol-nas)";
+  if (protocol.includes("Diameter")) return "var(--protocol-diameter)";
+  if (protocol.includes("GTP")) return "var(--protocol-gtp)";
+  return PROTOCOL_COLORS[protocol] ?? "var(--border)";
+}
+
+export function PacketList({
+  packets,
+  selectedIndex,
+  onSelect,
+  emptyTitle = "Upload a PCAP file to get started",
+  emptyHint,
+}: Props) {
   if (packets.length === 0) {
     return (
       <div className="packet-list empty">
-        <p>Upload a PCAP file to get started</p>
+        <div className="packet-empty-state">
+          <p>{emptyTitle}</p>
+          {emptyHint && <span>{emptyHint}</span>}
+        </div>
       </div>
     );
   }
@@ -32,7 +53,6 @@ export function PacketList({ packets, selectedIndex, onSelect }: Props) {
         <thead>
           <tr>
             <th>#</th>
-            <th>Time</th>
             <th>Source</th>
             <th>Destination</th>
             <th>Protocol</th>
@@ -48,15 +68,14 @@ export function PacketList({ packets, selectedIndex, onSelect }: Props) {
               onClick={() => onSelect(pkt.index)}
             >
               <td className="mono">{pkt.index}</td>
-              <td className="mono">{formatTime(pkt.timestamp)}</td>
               <td className="mono">{pkt.srcAddr}</td>
               <td className="mono">{pkt.dstAddr}</td>
               <td>
                 <span
                   className="protocol-badge"
                   style={{
-                    borderColor: PROTOCOL_COLORS[pkt.protocol] ?? "var(--border)",
-                    color: PROTOCOL_COLORS[pkt.protocol] ?? "var(--text-secondary)",
+                    borderColor: protocolColor(pkt.protocol),
+                    color: protocolColor(pkt.protocol),
                   }}
                 >
                   {pkt.protocol}
@@ -70,13 +89,4 @@ export function PacketList({ packets, selectedIndex, onSelect }: Props) {
       </table>
     </div>
   );
-}
-
-function formatTime(ts: string): string {
-  try {
-    const d = new Date(ts);
-    return d.toISOString().substring(11, 23);
-  } catch {
-    return ts;
-  }
 }

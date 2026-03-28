@@ -9,9 +9,7 @@ type TreeNode struct {
 }
 
 type PacketDetail struct {
-	Index      int           `json:"index"`
-	Summary    PacketSummary `json:"summary"`
-	Layers     []TreeNode    `json:"layers"`
-	RawHex     string        `json:"rawHex"`
-	DecodeInfo string        `json:"decodeInfo,omitempty"`
+	Index  int        `json:"index"`
+	Layers []TreeNode `json:"layers"`
+	RawHex string     `json:"rawHex,omitempty"`
 }
