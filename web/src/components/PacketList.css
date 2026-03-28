@@ -1,0 +1,76 @@
+.packet-list {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  border-right: 1px solid var(--border);
+}
+
+.packet-list.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.packet-list table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.packet-list thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--bg-tertiary);
+}
+
+.packet-list th {
+  padding: 6px 10px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.packet-list td {
+  padding: 4px 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.packet-list .mono {
+  font-family: "JetBrains Mono", "Fira Code", "Menlo", monospace;
+  font-size: 11px;
+}
+
+.packet-list tbody tr {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.packet-list tbody tr:hover {
+  background: var(--bg-tertiary);
+}
+
+.packet-list tbody tr.selected {
+  background: rgba(108, 140, 255, 0.12);
+}
+
+.protocol-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  border: 1px solid;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.info-cell {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-secondary);
+}

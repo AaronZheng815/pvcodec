@@ -1,0 +1,98 @@
+.packet-tree {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.packet-meta {
+  display: flex;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.packet-tree.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.tree-layers {
+  flex: 1;
+  overflow: auto;
+  padding: 4px 0;
+}
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  cursor: default;
+  border-radius: 2px;
+}
+
+.tree-row.expandable {
+  cursor: pointer;
+}
+
+.tree-row:hover {
+  background: var(--bg-tertiary);
+}
+
+.tree-arrow {
+  display: inline-block;
+  font-size: 8px;
+  color: var(--text-secondary);
+  transition: transform 0.15s;
+  width: 10px;
+  text-align: center;
+}
+
+.tree-arrow.open {
+  transform: rotate(90deg);
+}
+
+.tree-name {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-family: "JetBrains Mono", "Fira Code", "Menlo", monospace;
+  font-size: 11px;
+}
+
+.tree-value {
+  color: var(--accent);
+  font-family: "JetBrains Mono", "Fira Code", "Menlo", monospace;
+  font-size: 11px;
+}
+
+.tree-error {
+  color: #fca5a5;
+  font-size: 11px;
+}
+
+.hex-dump {
+  max-height: 160px;
+  overflow: auto;
+  padding: 8px 12px;
+  background: var(--bg-tertiary);
+  border-top: 1px solid var(--border);
+}
+
+.hex-dump pre {
+  font-family: "JetBrains Mono", "Fira Code", "Menlo", monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
